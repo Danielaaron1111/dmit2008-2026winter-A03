@@ -61,11 +61,10 @@ document.getElementById("expense-form-add").addEventListener(
             renderExpenses(theExpenses)  // re-render expenses
             this.reset();
         } else {
-            const expenseId = parseInt(document.getElementById("expense-id").value) // get hidden ID input from input fields
+            const expenseId = parseInt(document.getElementById("expense-id").value); // get hidden ID input from input fields
             const expenseToEdit = theExpenses.find(
                 (expense) => expense.id === expenseId
             ); // match an actual data element in expense container by id
-
             if (expenseToEdit) {  // first, make sure we actually got an object!
                 expenseToEdit.title = title;
                 expenseToEdit.category = category;
@@ -90,29 +89,41 @@ document.getElementById("searchbox").addEventListener(
         renderExpenses(filteredExpenses);
     }
 )
-//5.- edit and delete buttons
-// i could attach ev in each button
-//or i can attach one event listener to the overall container, and then differentiate speceifics 
+
+// 5. edit & delete buttons
+//    I could attach a click event listener to every single button, e.g. when I render the cards
+//    ->  *or*, I can attach *one* event listener to the overall container, and then differentiate specifics
+//        based on (in this case) the button class I've assigned (edit vs. delete) and the id for each card.
 expenseContainer.addEventListener(
-  "click", //any click event inside this container. i'll differentiate later 
-  function (event) {
-    //a) implement logic for delete button
-    if(event.target.classList.contains("delete-btn")) {
-      const expenseId = parseInt(event.target.id);
-      const expenseIndex = theExpenses.findIndex(
-        //you would use indexOf for privimitive types, and findIndex
-        (expense) => expense.id === expenseId
-      ); 
-      if (expenseIndex !== -1) { //
-        theExpenses.splice(expenseIndex, 1)
-        renderExpenses(theExpenses)
-      }
+    "click",  // any click event inside this container. I'll differentiate later
+    function (event) {
+        // a) implement logic for delete button
+        if (event.target.classList.contains("delete-btn")) {
+            const expenseId = parseInt(event.target.id);
+            const expenseIndex = theExpenses.findIndex(
+                // you would use IndexOf for primitive types, and findIndex for e.g. objects
+                (expense) => expense.id === expenseId
+            );
+            if (expenseIndex != -1) { // because findIndex returns -1 if it can't find a matching element
+                theExpenses.splice(expenseIndex, 1); // mouse over splice if you're confused about these params
+                renderExpenses(theExpenses);
+            }
+        // b) implement logic for edit button
+        } else if (event.target.classList.contains("edit-btn")) {
+            const expenseId = parseInt(event.target.id);
+            const expenseToEdit = theExpenses.find(
+                (expense) => expense.id === expenseId
+            );
+            if (expenseToEdit) {
+                document.getElementById("title").value = expenseToEdit.title;
+                document.getElementById("amount").value = expenseToEdit.amount;
+                document.getElementById("category").value = expenseToEdit.category;
+                document.getElementById("date").value = expenseToEdit.date;
+                document.getElementById("expense-id").value = expenseToEdit.id;
+                // remember how we were checking whether to create or edit based on the submit button's text?
+                document.getElementById("submiter").innerText = "Save Changes";
 
-      
-
-      
+            }
+        }
     }
-    //b) implement lofic for edit button 
-
-  }
 )
