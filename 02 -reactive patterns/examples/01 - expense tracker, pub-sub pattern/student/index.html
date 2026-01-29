@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header>
+    <h1>Expense Tracker</h1>
+  </header>
+  <main>
+    <div class="container">
+      <div class="form-container">
+        <h2>Add Expense</h2>
+        <form id="expense-form-add">
+          <input type="text" id="title" placeholder="Title" required>
+          <input type="text" pattern="^\d*(\.\d{0,2})?$" id="amount" placeholder="Amount" required>
+          <input type="date" id="date" placeholder="Date" required>
+          <select id="category" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="food">Food</option>
+            <option value="transport">Transport</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="utilities">Utilities</option>
+            <option value="other">Other</option>
+          </select>
+          <button type="submit">Add Expense</button>
+        </form>
+      </div>
+      <div class="form-container">
+          <input type="search" id="searchbox" placeholder="Search">
+      </div>
+      <div class="expense-list">
+        <h2>Expenses</h2>
+        <expense-container id="container"  expenses='[]'>
+        </expense-container>
+      </div>
+    </div>
+  </main>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

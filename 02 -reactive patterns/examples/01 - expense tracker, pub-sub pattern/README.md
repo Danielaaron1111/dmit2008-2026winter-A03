@@ -11,6 +11,8 @@ The **Publish/Subscribe (Pub/Sub)** pattern is a messaging design pattern that d
 - **Event Broker (Optional)**: Manages the communication
 Imagine you have a news agency that just tell you those news you have anounced your interest previously.
 
+Additional explanation of the pub/sub pattern: [link](https://medium.com/@MakeComputerScienceGreatAgain/understanding-the-pub-sub-design-pattern-a-fundamental-building-block-for-scalable-and-decoupled-63f2efe22b4e)
+
 ### Why Use It?
 
 - **Loose Coupling**: Components don’t need to know about each other.
