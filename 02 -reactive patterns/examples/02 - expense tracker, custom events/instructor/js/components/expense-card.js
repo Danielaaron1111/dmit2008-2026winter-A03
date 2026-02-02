@@ -117,6 +117,29 @@ class ExpenseCard extends HTMLElement {
         );
       }
     );
+
+    // 2. edit button clicked event
+    this.shadowRoot.querySelector(".edit-btn").addEventListener(
+      "click",
+      () => {
+        this.dispatchEvent(
+          new CustomEvent(
+            "expense-edit", // first param: name of custom event
+            {                 // second param: payload & behaviour
+              detail: { 
+                id: this.id,
+                title: this.getAttribute("title"),
+                category: this.getAttribute("category"),
+                date: this.getAttribute("date"),
+                amount: this.getAttribute("amount"),
+               },                      // detail: message paylod
+              bubbles: true,           // propagates upward thru DOM, without needing to know to/from components
+              compose: true,           // event (and therefore message payload) can cross shadow DOM boundary
+            }
+          )
+        );
+      }
+    );
   }
 }
 
