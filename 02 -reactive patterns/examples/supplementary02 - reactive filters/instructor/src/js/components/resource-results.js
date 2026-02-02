@@ -19,6 +19,15 @@ template.innerHTML = `
 class ResourceResults extends HTMLElement {
   #results = [];
 
+  // If I'm filtering, I need 
+  // - one place to load/store the *full* dataset of results, (already exists: #results)
+  // - and another place to store the *filtered* dataset
+  // - this also means I have to render from the *filtered* dataset, not #results
+
+  // I need a method for applying the filters to the results
+
+  // I need to modify my render method accordingly
+
   constructor() {
     super();
     this._handleResultClick = this._handleResultClick.bind(this); 

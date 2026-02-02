@@ -60,3 +60,6 @@ const detailsComponent = document.querySelector('resource-details');
 resultsComponent.addEventListener('resource-selected', (event) => {
   detailsComponent.resource = event.detail.result;
 });
+
+// Finally, wire the emitted filter event to a receiver in results
+// -> add an event listener that affects the ResultComponent's filter data
