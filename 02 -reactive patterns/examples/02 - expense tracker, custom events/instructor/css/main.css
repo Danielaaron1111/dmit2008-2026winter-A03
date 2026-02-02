@@ -1,0 +1,36 @@
+header{
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center; 
+}
+.container{
+    max-width: 960px;
+    margin: 10px auto;
+    background-color: #f4f4f4;
+    padding: 10px;
+}   
+.form-container{
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin: 10px;
+}
+#searchbox{
+    width: 100%;
+    line-height: 2;
+}
+#expense-form-add{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+#expense-form-add input{
+    line-height: 2;
+    display: block;
+    flex: 1;
+
+}
