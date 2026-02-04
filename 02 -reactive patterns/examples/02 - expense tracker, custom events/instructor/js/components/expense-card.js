@@ -75,7 +75,7 @@ class ExpenseCard extends HTMLElement {
       this.getAttribute("title") || "No title";
     this.shadowRoot.querySelector(".category").textContent =
       "Category: " + (this.getAttribute("category") || "");
-    this.shadowRoot.querySelector(".date").textContent =
+this.shadowRoot.querySelector(".date").textContent =
       this.getAttribute("date") || "";
     this.shadowRoot.querySelector(".amount").textContent =
       "$" + parseFloat(this.getAttribute("amount") || 0).toFixed(2);
