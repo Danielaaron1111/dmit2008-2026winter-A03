@@ -1,5 +1,8 @@
 import Head from "next/head";
 
+// materialUI components
+import Container from '@mui/material/Container';
+
 export default function Home() {
   return (
     <>
@@ -11,7 +14,9 @@ export default function Home() {
       </Head>
 
       <main>
-
+        <Container>
+          put some stuff in the container
+        </Container>
       </main>
 
     </>
