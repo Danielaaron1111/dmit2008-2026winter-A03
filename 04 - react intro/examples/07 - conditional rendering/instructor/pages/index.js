@@ -1,5 +1,10 @@
+// react hooks
+import { useState } from 'react';
+
+// data
 import { MOVIE_LIST } from '../utils/movies'
 
+// MUI components
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -15,7 +20,14 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
+
 export default function Home() {
+
+  {/* [statefulValue, setStatefulValue] = useState(defaultValue) */}
+  const [searchText, setSearchText] = useState("")
+  const [year, setYear] = useState("")
+
+
   return (
     <div>
       <Head>
@@ -35,13 +47,17 @@ export default function Home() {
           </Typography>
           <form style={{width: '100%'}}>
             <Grid container spacing={2}>
+              {/* This uses an older version of MUI, specific to this package-lock.json,
+                  hence the use of item & xs props.
+              */}
               <Grid item xs={6}>
                 <TextField
                   id="search-field"
                   label="search..."
                   variant="standard"
                   sx={{width: '100%'}}
-                  
+                  onChange={(e) => setSearchText(e.target.value)}
+                  value={searchText}
                 />
               </Grid>
               <Grid item xs={4}>
@@ -50,6 +66,8 @@ export default function Home() {
                   label="year"
                   variant="standard"
                   sx={{width: '100%'}}
+                  onChange={(e) => setYear(e.target.value)}
+                  value={year}
                  
                 />
               </Grid>
