@@ -27,11 +27,58 @@ export default function Home() {
   const [searchText, setSearchText] = useState("")
   const [year, setYear] = useState("")
 
+  // this is just what we're displaying from
+  const [movies, setMovies] = useState(MOVIE_LIST)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`search: ${searchText}`)
     console.log(`year: ${year}`)
+    filterMovies();
   }
+
+  const filterMovies = () => {
+    /* Remember: React stateful variables are *immutable*, so I always need to
+                completely reconstruct the value I want to write to pass to the setter.
+
+                I can't e.g. push or pop from the 'movies' variable; it's immutable.
+    */
+
+    // 1. set up a new copy of the movies array
+    let filteredMovies = [...MOVIE_LIST]
+
+    // 2. if there's a search term, filter the copy array for that term
+    if (searchText.trim()) {
+      // I'm going to use [].filter() to reconstruct my array.
+      // -> With [].filter(), only elements that pass the condition are included in the new array.
+      // -> newArray = oldArray.filter((element) => {some condition})
+      filteredMovies = filteredMovies.filter(
+        (movie) => {
+          // in [].filter(), you're returning *whether* something is true/truthy or false/falsey,
+          // *not* specific values themselves.
+          return movie.name.toLowerCase().includes(
+            searchText.trim().toLowerCase()
+          )
+        }
+      )
+    }
+
+    // 3. if there's a year, ditto
+    if (year.trim()) {
+      // I'm going to use [].filter() to reconstruct my array.
+      // -> With [].filter(), only elements that pass the condition are included in the new array.
+      // -> newArray = oldArray.filter((element) => {some condition})
+      filteredMovies = filteredMovies.filter(
+        (movie) => {
+          return movie.year === parseInt(year.trim())
+        }
+      )
+    }
+
+    // 4. now that I've filtered my mutable, copied array based on inputs, I can
+    //    pass that to the setter for the stateful movies variable.
+    setMovies(filteredMovies)
+  } 
 
 
   return (
@@ -92,7 +139,7 @@ export default function Home() {
             </Grid>
           </form>
           <List sx={{width: `100%`}}>
-          { MOVIE_LIST.map((movieData, index)=> {
+          { movies.map((movieData, index)=> {
               return <ListItem key={index}>
                 <ListItemText>
                   <Typography variant="p" component="div">
