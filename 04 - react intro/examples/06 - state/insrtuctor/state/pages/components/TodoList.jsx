@@ -51,13 +51,19 @@ export default function TodoList() {
 
         <Grid container spacing={2}>
 
-            <Grid item xs={12}>
+            {/* much like in Bootstrap, or flexboxes in general,
+                MUI flex-capable layout components use a 12-column grid.
+
+                If I wanted to work with explicit single-direction rows or columns,
+                I'd use the Stack component.
+            */}
+            <Grid size={12}>
               <Typography variant="h2" component="h2">
                 Our Todo List
               </Typography>
             </Grid>
 
-            <Grid item xs={10}>
+            <Grid size={10}>  
                 <TextField
                     id="standard-basic"
                     label="New Todo Item"
@@ -68,7 +74,7 @@ export default function TodoList() {
                 />
             </Grid>
 
-            <Grid item xs={2}>
+            <Grid size={2}>
               <Button
                 variant="contained"
                 onClick={onAddTodoClick}
