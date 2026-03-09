@@ -24,6 +24,13 @@ export default function Home() {
     author: "Author name here"
   })
 
+  const handleClick = () => {
+    setQuoteData({
+      quote: "I'm allegedly starting to enjoy JS, but don't tell anyone",
+      author: "Me"
+    })
+  }
+
   return (
     <div>
       <Head>
@@ -70,6 +77,7 @@ export default function Home() {
             >
               <Button
                 variant="contained"
+                onClick={handleClick}
               >
                 Get New Quote
               </Button>
