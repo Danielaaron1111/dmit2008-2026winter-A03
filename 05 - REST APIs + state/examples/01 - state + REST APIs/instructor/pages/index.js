@@ -1,6 +1,9 @@
 // react hooks
 import { useState } from 'react';
 
+// API functions
+import { getRandomQuote } from './api/quotes.js';
+
 // nextjs copmonents/stylesheets
 import Head from 'next/head'
 import Image from 'next/image'
@@ -25,10 +28,15 @@ export default function Home() {
   })
 
   const handleClick = () => {
-    setQuoteData({
-      quote: "I'm allegedly starting to enjoy JS, but don't tell anyone",
-      author: "Me"
-    })
+    /* OK, so we were having some issues with fetching from the zenquotes API.
+       I'll take you through a step-by-step process of how I found out what was wrong.
+
+       Like I mentioned in some of your Assignment 1 feedback, separating API & UI layers
+       makes code more readable & debugging less of a confusing headache, so let's start there.
+    
+       First, we'll just make an API call and look in the console.
+    */
+    getRandomQuote()
   }
 
   return (
