@@ -29,19 +29,20 @@ import Typography from '@mui/material/Typography';
 import ReviewCard from './components/ReviewCard';
 
 
-export default function Home() {
+const API_BASE_URL = 'http://localhost:5000' 
 
-  // const MOCK_ADAPTATION_RATING = [{
-  //   'title': 'Fight Club',
-  //   'comment': 'Great movie and book',
-  //   'rating': 10
-  // }]
+
+export default function Home() {
 
   const [reviews, setReviews] = useState([])
 
-
   const loadReviews = () => {
-    console.log('pretend I loaded reviews')
+    fetch(`${API_BASE_URL}/reviews`) // made my request
+      .then((response) => {
+        return response.json()  // parsed JSON of response into JS objectss
+      }).then((data) => {
+        setReviews(data)
+      })
   }
 
   return (
@@ -86,6 +87,7 @@ export default function Home() {
                   variant="standard"
                 />
               </Grid>
+
               <Grid item xs={12} sm={12}>
                 <FormControl>
                   <FormLabel id="adaptation-rating">Rating</FormLabel>
