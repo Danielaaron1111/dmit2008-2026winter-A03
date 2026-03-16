@@ -1,6 +1,9 @@
 // hooks
 import { useState } from 'react';
 
+// our own API functions
+import { getReviews } from './api/movies';
+
 // nextjs components
 import Head from 'next/head'
 
@@ -42,12 +45,9 @@ export default function Home() {
 
 
   const loadReviews = () => {
-    fetch(`${API_BASE_URL}/reviews`) // made my request
-      .then((response) => {
-        return response.json()  // parsed JSON of response into JS objectss
-      }).then((data) => {
-        setReviews(data)
-      })
+    getReviews().then((movieData) => {
+      setReviews(movieData)
+    })
   }
 
 
