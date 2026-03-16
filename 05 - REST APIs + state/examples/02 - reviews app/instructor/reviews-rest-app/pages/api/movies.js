@@ -16,3 +16,26 @@ export const getReviews = () => {
       return Promise.resolve(data)
     })
 }
+
+export const postReview = ({ title, comment, rating }) => {
+  // always return the fetch, because you need to return the fetch promise!
+  return fetch(`${BASE_URL}/reviews/`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'       
+    },
+    body: JSON.stringify({
+      title,
+      comment,
+      rating
+    })
+  }).then((response)=> {
+    return response.json()
+  }).then((data)=> {
+    // When calling this function, we'd use it like:
+        // postReview({title: title,
+        //   comment: comments,
+        //   rating: rating}).then((returnedData) => { }))
+    return Promise.resolve(data)
+  })
+}

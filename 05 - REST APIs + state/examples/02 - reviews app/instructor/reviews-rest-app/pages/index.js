@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // our own API functions
-import { getReviews } from './api/movies';
+import { getReviews, postReview } from './api/movies';
 
 // nextjs components
 import Head from 'next/head'
@@ -45,49 +45,28 @@ export default function Home() {
 
 
   const loadReviews = () => {
-    getReviews().then((movieData) => {
-      setReviews(movieData)
+    getReviews().then((moviesData) => {
+      setReviews(moviesData)
     })
   }
 
 
   const submitReview = (event) => {
+
     event.preventDefault();
-    fetch(`http://localhost:5000/reviews`,
-      // we can also pass an object of various specifics as the 2nd param for fetch:
-      {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        // because we're sending data to a REST API, we encode it as JSON; this is
-        // a language-agnostic format. APIs don't necessarily know about JS objects!
-        body: JSON.stringify(
-          {
-            // notice how for JSON.stringify, we can just declare the variable
-            // if its name matches the JSON field
-            title,
-            // in this case, it's slightly different, so I have to do field: varName
-            comment: comments,
-            rating
-          }
-        )
-      }
-    ).then((response)=> {
-      return response.json()
+
+    postReview({
+      title: title,
+      comment: comments,
+      rating: rating,
     }).then((movie)=> {
       // when we POST and create something anew, usually a (well-configured) REST API
-      // sends us back a body response with the thing we just created.
-
-      // in this example, we're letting the API data control what we render for front-end.
-      // when we get body response back from item we created, use it to update state we render from!
-      // state -> API -> state doesn't have to be strictly coupled like this (for example, I could just
-      // watch for a 201 status code (created successfully) and just update 'reviews' with the local state
-      // data, but I want to show you 'data journey' & POST request/response behaviour in this example).
+      // sends us back a body response with the thing we just created, which we'll use to re-render.
 
       setReviews([movie, ...reviews]) // compose new array w/ newly created item -> trigger re-render 
-      resetForm();
     })
+
+    resetForm();
   }
 
   const resetForm = () => {
