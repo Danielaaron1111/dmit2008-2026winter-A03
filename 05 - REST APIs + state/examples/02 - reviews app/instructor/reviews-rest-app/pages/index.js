@@ -58,7 +58,7 @@ export default function Home() {
       {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json'       
+          'Content-Type': 'application/json'
         },
         // because we're sending data to a REST API, we encode it as JSON; this is
         // a language-agnostic format. APIs don't necessarily know about JS objects!
@@ -146,7 +146,7 @@ export default function Home() {
                     aria-labelledby="adaptation-rating"
                     name="rating-buttons-group"
                     value={rating}
-                    onChange={(e) => {setRating(e.target.value)}}
+                    onChange={(e) => {setRating(parseInt(e.target.value))}}
                   >
                     <FormControlLabel value="1" control={<Radio />} label="1" />
                     <FormControlLabel value="2" control={<Radio />} label="2" />
