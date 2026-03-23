@@ -17,9 +17,15 @@ export default function Home() {
 
   const QUOTE_API_URL = 'https://dummyjson.com/quotes/'
 
+  // separate these out so I can exclude them from quote retrieval count
+  const DEFAULT_QUOTE = "Quote here."
+  const DEFAULT_AUTHOR = "Author here."
+
+  const [numberOfQuotes, setNumberOfQuotes] = useState(0)
+
   const [quoteData, setQuoteData] = useState({
-    quote: "Quote here.",
-    author: "Author here"
+    quote: DEFAULT_QUOTE,
+    author: DEFAULT_AUTHOR
   })
 
   const getRandomQuote = () => {
@@ -35,29 +41,30 @@ export default function Home() {
       })  
   }
 
-  useEffect(
-
-    // param 1: the callback (logic that should fire for the effect)
-    () => {
+  // load a quote from API when component mounts.
+  useEffect(() => {
       getRandomQuote()
-    },
-
-    // param 2: dependency array (empty — fire only when component mounts)
-    []
+    }, []
+    // comments in prev. commit — usually effects are written more tersely, like this!
   )
 
-  /* If you look in your console, you'll notice this fires twice!
-     
-     That's because we're using React strict mode (see next.config.js), which is a debug/dev mode.
-       more here if you're interested: https://react.dev/reference/react/StrictMode
+  // new effect to update count every time quote changes (except initial state, since that
+  // is still technically counted as a state change that the effect will respond to)
+  useEffect(
+    () => {
+      if (quoteData.quote !== DEFAULT_QUOTE && quoteData.author !== DEFAULT_AUTHOR) {
+        // remember: if Strict Mode were set on (see next.config.js), this would fire double
+        //           because strict mode fires effects twice to test any cleanup (if present).
+        setNumberOfQuotes(numberOfQuotes + 1)
+      }
+    },
 
-     e.g. effects re-fire to ensure that any cleanup (if present) happens properly, etc.
-     Just mentioning this here so you don't go nuts during examples/assignments wondering why stuff
-     is happening twice.
+    [quoteData] // effect will re-fire every time quoteData changes
+  )
 
-     If you want proof, set reactStrictMode to false in next.config.js and you'll see the effect
-     fire only once.
-
+  /* I told you that useEffect should 'only'/mainly be used to talk to external systems; it can be
+     misused pretty easily. In this case, because the quote count updating *depends on* prior side-effecting
+     behaviour from the REST API (i.e. do it only when we get new API data), it's fine!
   */
 
   return (
@@ -112,6 +119,17 @@ export default function Home() {
               </Button>
             </Box>
           </Box>
+
+          <Typography
+            sx={{pt: 8}}
+            variant="h5"
+            align="center"
+            color="text.primary"
+            paragraph
+          >
+            You have fetched {numberOfQuotes} quotes
+          </Typography>
+
         </Container>
       </main>
     </div>
