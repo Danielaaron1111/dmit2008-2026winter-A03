@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 import Image from 'next/image'
@@ -22,7 +22,7 @@ export default function Home() {
     author: "Author here"
   })
 
-  const handleClick = () => {
+  const getRandomQuote = () => {
     fetch(`${QUOTE_API_URL}/random`)
       .then((response)=> {
         return response.json()
@@ -33,10 +33,32 @@ export default function Home() {
           author: data.author
         })
       })  
-
-
-    
   }
+
+  useEffect(
+
+    // param 1: the callback (logic that should fire for the effect)
+    () => {
+      getRandomQuote()
+    },
+
+    // param 2: dependency array (empty — fire only when component mounts)
+    []
+  )
+
+  /* If you look in your console, you'll notice this fires twice!
+     
+     That's because we're using React strict mode (see next.config.js), which is a debug/dev mode.
+       more here if you're interested: https://react.dev/reference/react/StrictMode
+
+     e.g. effects re-fire to ensure that any cleanup (if present) happens properly, etc.
+     Just mentioning this here so you don't go nuts during examples/assignments wondering why stuff
+     is happening twice.
+
+     If you want proof, set reactStrictMode to false in next.config.js and you'll see the effect
+     fire only once.
+
+  */
 
   return (
     <div>
@@ -84,7 +106,7 @@ export default function Home() {
             >
               <Button
                 variant="contained"
-                onClick={handleClick}
+                onClick={getRandomQuote}
               >
                 Get New Quote
               </Button>
