@@ -1,14 +1,42 @@
+// react hooks
+import { useEffect, useState } from 'react';
+
+// our own API functions
+import { getAgencies } from '@utils/api/agencies';
+
+// nextjs components
 import Head from 'next/head'
 
+// mui components
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
+// our own components
 import AgencyCard from '@components/AgencyCard';
 import NavBar from '@components/NavBar';
 
 
 export default function Home() {
+
+  const [agenciesData, setAgenciesData] = useState([])
+
+  // grab API data on load
+  useEffect(
+    // param 1: callback
+    () => {
+      getAgencies().then(
+        (data) => { 
+          console.log(data);
+          // looking at the data shape on — https://lldev.thespacedevs.com/2.2.0/agencies/
+          // I just want the stuff in the 'results' key (the actual space agency items)
+          setAgenciesData(data.results)
+        }
+      )
+    },
+    // param 2: dependency array (empty -> fire only on mount)
+    [],
+  )
 
   return (
     <div>
