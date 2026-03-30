@@ -57,6 +57,12 @@ export default function Home() {
     []
   )
 
+  // for debugging "reviews" purposes only
+  useEffect(()=> {
+    console.log("index.js: 'reviews' changed:");
+    console.log(reviews);
+  }, [reviews])
+
   return (
     <div>
       <Head>
