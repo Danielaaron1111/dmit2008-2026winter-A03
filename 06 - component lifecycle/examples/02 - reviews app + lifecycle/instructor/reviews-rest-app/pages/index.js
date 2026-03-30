@@ -25,7 +25,7 @@ import Typography from '@mui/material/Typography';
 
 import AdaptationReviewCard from '../components/AdaptationReviewCard'
 
-import { getReviews, postReview } from '../utils/api/reviews.js'
+import { getReviews, postReview, deleteReview } from '../utils/api/reviews.js'
 
 export default function Home() {
 
@@ -49,6 +49,25 @@ export default function Home() {
     getReviews().then((data)=> {
       setReviews(data)
     })
+  }
+
+  const deleteReviewHandler = (reviewId) => {
+    console.log(`deleting review: ${reviewId}`)
+
+    deleteReview(reviewId).then( // delete from API first
+      // we don't need a predicate/input param for the callback, since we're 
+      // not using anything from the returned data
+      () => {
+        // if the API deletion succeeds, also change it from state, using the setter
+        // function I passed down under a different name:
+        const remainingReviews = reviews.filter( // state vars are immutable; need to rebuild array
+          (review) => { return review.id !== reviewId }
+        )
+
+        setReviews(remainingReviews);
+        console.log("deleted!");
+      }
+    );
   }
 
   useEffect(
@@ -151,8 +170,7 @@ export default function Home() {
             return <AdaptationReviewCard
                 key={index}
                 adaptation={adaptation}
-                reviews={reviews}            // will need to read reviews
-                onReviewsChange={setReviews} // will need to rewrite reviews
+                onDelete={deleteReviewHandler}
               />
           })}
         </Container>
