@@ -138,12 +138,13 @@ export default function Home() {
             </Grid>
           </form>
 
+          {/* In order to make something self-delete e.g. by button, I would have to
+              pass some sort of uniquely identifiable field, e.g. the ID
+          */}
           {reviews.map((adaptation, index)=> {
             return <AdaptationReviewCard
                 key={index}
-                rating={adaptation.rating}
-                title={adaptation.title}
-                comment={adaptation.comment}
+                adaptation={adaptation}
               />
           })}
         </Container>
