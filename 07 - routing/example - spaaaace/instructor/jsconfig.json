@@ -1,3 +1,7 @@
+// Here's where I can set absolute paths in next.js, so that when
+// I have an annoyingly nested project structure, any file can
+// import directly from these pseudo-roots instead of all my imports
+// looking like: ../../../../../../../something/file
 {
     "compilerOptions": {
       "baseUrl": "./",
