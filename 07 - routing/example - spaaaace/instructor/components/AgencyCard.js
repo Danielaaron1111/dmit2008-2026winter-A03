@@ -10,24 +10,25 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-// props best practices: option 1 - one overall prop, more descriptively named
-export default function AgencyCard(agencyData) {
+// props best practices: option 2 - use destructuring to specifically name each prop you're using
+//                                  so someone immediately knows the 'ingredients' before reading implementation
+export default function AgencyCard({ imageUrl, name, abbreviation, description }) {
     return <Card sx={{ marginTop: "8px", maxWidth: 345 }}>
-    {agencyData.imageUrl && <CardMedia
+    {imageUrl && <CardMedia
       component="img"
       height="140"
-      image={agencyData.imageUrl}
+      image={imageUrl}
       alt="green iguana"
     />}
     <CardContent>
       <Typography variant="h5" component="div">
-        {agencyData.name}
+        {name}
       </Typography>
       <Typography gutterBottom variant="body2" component="div">
-        {agencyData.abbreviation}
+        {abbreviation}
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        {agencyData.description}
+        {description}
       </Typography>
     </CardContent>
     <CardActions>
