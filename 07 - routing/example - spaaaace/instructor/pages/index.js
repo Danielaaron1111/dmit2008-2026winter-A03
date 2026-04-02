@@ -27,7 +27,7 @@ export default function Home() {
     () => {
       getAgencies().then(
         (data) => { 
-          console.log(data);
+          console.log("Home: effect-based fetch:", data);
           // looking at the data shape on — https://lldev.thespacedevs.com/2.2.0/agencies/
           // I just want the stuff in the 'results' key (the actual space agency items)
           setAgenciesData(data.results)
@@ -53,6 +53,7 @@ export default function Home() {
           <Typography variant="h3">
             Space Agencies
           </Typography>
+
           <Box
             sx={{
               marginTop: 2,
@@ -61,7 +62,16 @@ export default function Home() {
               alignItems: 'center',
             }}
           >
+            {agenciesData.map(
+              (agency) => { 
+                return <AgencyCard
+                  key={agency.id}
+                  agency={agency}
+                />
+              }
+            )}
           </Box>
+
         </Container>
 
     </div>
