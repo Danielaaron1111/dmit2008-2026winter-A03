@@ -85,6 +85,38 @@ export default function AgencyDetail() {
                 />
               </Grid>
 
+              <Grid item xs="4">
+                <Typography variant="h5">
+                    {`Agency Information`}
+                </Typography>
+                <SimpleDetailsCard 
+                    title={'administrator'}
+                    description={`${agencyData.administrator}`}
+                />
+                <SimpleDetailsCard 
+                    title={'Space Agency Details'}
+                    description={`Founded ${agencyData.founding_year}`}
+                    subDescription={agencyData.description}
+                />
+              </Grid>
+
+              <Grid item xs="4">
+                <Typography variant="h5">
+                    {`SpaceCraft`}
+                </Typography>
+                { agencyData.spacecraft_list && agencyData.spacecraft_list.map((spaceCraft)=> {
+                    return <SimpleDetailsCard 
+                        key={spaceCraft.id}
+                        description={`${spaceCraft.name}`}
+                        subDescription={spaceCraft.id}
+                        buttonCallback={()=> {
+                          console.log("go to the space page")    
+                        }}
+                        buttonName="Go to SpaceCraft"
+                      />
+                })}
+              </Grid>
+
             </Grid>
           </Container>
       }
