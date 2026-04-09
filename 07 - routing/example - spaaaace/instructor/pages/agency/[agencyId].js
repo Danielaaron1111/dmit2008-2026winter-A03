@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 // our components
 import NavBar from '@components/NavBar';
 import LoadingCircle from '@components/LoadingCircle';
+import SimpleDetailsCard from '@components/SimpleDetailsCard';
 
 export default function AgencyDetail() {
 
@@ -49,13 +50,41 @@ export default function AgencyDetail() {
         :
           <Container sx={{paddingTop:2}}>
             <Grid container>
-                <Grid item xs="2">
-                </Grid>
-                <Grid item xs="10">
-                  <Typography variant="h3" gutterBottom>
-                    Agency Page for {agencyId}
-                  </Typography>
-                </Grid>
+
+              <Grid item xs="2">
+                <img
+                  alt={agencyData.name}
+                  src={agencyData.logo_url}
+                  style={{
+                    width: '120px'
+                  }}
+                />
+              </Grid>
+              <Grid item xs="10">
+                <Typography variant="h3" gutterBottom>
+                  {`${agencyData.name} (${agencyData.abbrev})`}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={4}>
+                <SimpleDetailsCard
+                  title="Total Launches"
+                  description={agencyData.total_launch_count} 
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <SimpleDetailsCard
+                  title="Successful Launches"
+                  description={agencyData.successful_launches} 
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <SimpleDetailsCard
+                  title="Successful Launches"
+                  description={agencyData.successful_launches} 
+                />
+              </Grid>
+
             </Grid>
           </Container>
       }
