@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 
 // our components
 import NavBar from '@components/NavBar';
-
+import LoadingCircle from '@components/LoadingCircle';
 
 export default function AgencyDetail() {
 
@@ -44,17 +44,21 @@ export default function AgencyDetail() {
 
       <NavBar />
 
-      <Container sx={{paddingTop:2}}>
-        <Grid container>
-          <Grid item xs="2">
-          </Grid>
-          <Grid item xs="10">
-            <Typography variant="h3" gutterBottom>
-              Agency Page for {agencyId}
-            </Typography>
-          </Grid>
-        </Grid>
-      </Container>
+      { !agencyData ?
+          <LoadingCircle />
+        :
+          <Container sx={{paddingTop:2}}>
+            <Grid container>
+                <Grid item xs="2">
+                </Grid>
+                <Grid item xs="10">
+                  <Typography variant="h3" gutterBottom>
+                    Agency Page for {agencyId}
+                  </Typography>
+                </Grid>
+            </Grid>
+          </Container>
+      }
 
     </>
   )
