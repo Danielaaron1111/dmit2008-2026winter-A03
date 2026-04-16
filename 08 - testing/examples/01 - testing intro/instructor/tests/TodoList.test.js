@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import TodoList from '../components/TodoList'
 
@@ -30,4 +30,23 @@ test('add button renders correctly', () => {
 
   // test
   expect(addButton).toBeInTheDocument()
+})
+
+test('new todo item is added successfully', () => {
+  // 1. setup
+  const EXPECTED_STRING = "Learning testing in JS & React"
+
+  render(<TodoList />)
+  const inputText = screen.getByLabelText("New Todo") // <- another selector via 'label' prop/attr
+  const addButton = screen.getByTestId("add-new-todo-button")
+  const todoList  = screen.getByTestId("todo-item-list")
+
+  // 2. act / execute logic
+  fireEvent.change( // simulate a 'change' event, e.g. what a drop-down or text input would fire
+    inputText,                            // param 1: the element 'emitting' the event
+    { target: { value: EXPECTED_STRING} } // param 2: the event object
+  )
+
+  // 3. test that the element now contains this value
+  expect(inputText.value).toBe(EXPECTED_STRING)
 })
