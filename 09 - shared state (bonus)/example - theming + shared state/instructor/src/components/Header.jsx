@@ -1,5 +1,10 @@
-// src/components/Header.jsx
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
+
 export default function Header({ tagline }) {
+
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   return (
     <div className="flex flex-wrap items-end justify-between gap-2">
       <div>
@@ -8,6 +13,7 @@ export default function Header({ tagline }) {
           {tagline ? tagline : 'Find student support services, labs, and campus resources.'}
         </p>
       </div>
+      <button className="btn btn-primary" onClick={toggleTheme}>toggle theme</button>
     </div>
   );
 }

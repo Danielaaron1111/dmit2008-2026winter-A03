@@ -13,20 +13,22 @@ function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <PageLayout header={<Header tagline="Find the right resources, right away" />}>
-      Current theme is: {theme}
-      <aside className="md:col-span-3 lg:col-span-1">
-        <Filters />
-      </aside>
-      <section className="md:col-span-2 lg:col-span-1">
-        <Results />
-      </section>
-      <aside className="md:col-span-1 lg:col-span-1">
-        <Details />
-      </aside>
-      <div className="btn btn-primary">is DaisyUI working?</div>
+    <div data-theme={theme}>
+      <PageLayout header={<Header tagline="Find the right resources, right away" />}>
+        <aside className="md:col-span-3 lg:col-span-1">
+          <Filters />
+        </aside>
+        <section className="md:col-span-2 lg:col-span-1">
+          <Results />
+        </section>
+        <aside className="md:col-span-1 lg:col-span-1">
+          <Details />
+        </aside>
+        Current theme is: {theme}
+        <div className="btn btn-primary">is DaisyUI working?</div>
 
-    </PageLayout>
+      </PageLayout>
+    </div>
     // <PageLayout
     //   header={<Header tagline="Find the right resources, right away" />}
     //   left={<Filters />}
