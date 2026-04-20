@@ -16,6 +16,7 @@ function App() {
       <aside className="md:col-span-1 lg:col-span-1">
         <Details />
       </aside>
+      <div className="btn btn-primary">is DaisyUI working?</div>
     </PageLayout>
     // <PageLayout
     //   header={<Header tagline="Find the right resources, right away" />}
