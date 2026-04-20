@@ -1,6 +1,10 @@
 export default function PageLayout({ header, children }) { //({ header, left, middle, right }) {
+  // with daisyUI installed, data-theme will apply themed styling;
+  // we can also use '-base-' instead of specific colours for colour styling
+
+  // try changing data-theme between 'light' and 'dark'
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div data-theme="dark" className="min-h-screen bg-base-200">
       <header className="border-b border-sky-600 bg-white px-6 py-4">
         {header}
       </header>
